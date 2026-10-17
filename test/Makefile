@@ -1,5 +1,9 @@
 # Makefile
 # See https://docs.cocotb.org/en/stable/quickstart.html for more info
+#
+# VGA mode runs at 25.175 MHz; the long tests use fast mode (100 kHz clock).
+# Verilator is fastest:   make SIM=verilator (needs Verilator 5.036 or later)
+# Icarus works too (slower).
 
 # defaults
 SIM ?= icarus
@@ -29,6 +33,11 @@ VERILOG_SOURCES += $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_f
 # this gets copied in by the GDS action workflow
 VERILOG_SOURCES += $(PWD)/gate_level_netlist.v
 
+endif
+
+ifeq ($(SIM),verilator)
+SIM_BUILD := $(SIM_BUILD)_verilator
+COMPILE_ARGS += -Wno-fatal -Wno-lint -Wno-style -O3
 endif
 
 # Allow sharing configuration between design and testbench via `include`:
