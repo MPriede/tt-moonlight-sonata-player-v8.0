@@ -43,7 +43,7 @@ pinout:
   uo[7]: "hsync"
 
   # Bidirectional pins
-  uio[0]: "audio out (1-bit sigma-delta, RC filter)"
+  uio[0]: "audio out (1 bit sigma delta, RC filter)"
   uio[1]: ""
   uio[2]: ""
   uio[3]: ""
